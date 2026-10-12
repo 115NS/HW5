@@ -1,0 +1,332 @@
+{
+  "101": {
+    "ticket_id": 101,
+    "ticket_type": "customer_order",
+    "summary": "Tauhid Zaman requests one CC-TEE-WHITE Bulldog tee in size S. Size S is out of stock, so the order cannot be fulfilled as requested now. Sizes M, L, and XL are available alternatives. A size S reprint is possible to consider, with a stated five-day vendor lead time, but no confirmed calendar arrival date or verified restock cost is available. Invoice 501 is a vendor payable, not a customer selling price.",
+    "delegated_to": [
+      "inventory",
+      "customer_service"
+    ],
+    "key_facts": [
+      {
+        "label": "Desk date",
+        "value": "2026-08-31",
+        "source": "get_ticket"
+      },
+      {
+        "label": "Requested item and quantity",
+        "value": "CC-TEE-WHITE, size S, qty 1",
+        "source": "get_ticket"
+      },
+      {
+        "label": "CC-TEE-WHITE size S on hand",
+        "value": "0",
+        "source": "inventory (check_stock)"
+      },
+      {
+        "label": "Size S shortfall",
+        "value": "1",
+        "source": "inventory (check_stock)"
+      },
+      {
+        "label": "Other sizes available",
+        "value": "M: 5; L: 3; XL: 2",
+        "source": "inventory (check_stock)"
+      },
+      {
+        "label": "Reprint vendor and lead time",
+        "value": "Bulldog Print Co; 5 days",
+        "source": "inventory (list_vendors)"
+      },
+      {
+        "label": "Invoice 501 characterization",
+        "value": "Open; $840.00 due; vendor invoice for rush reprint CC-TEE-WHITE S, not a customer order price record",
+        "source": "customer_service (consulted accounting)"
+      }
+    ],
+    "options": [
+      "Ask Tauhid whether M, L, or XL would work, subject to human confirmation of any order details.",
+      "Ask Tauhid whether they want the shop to look into a size S reprint; do not promise arrival timing or place an order without human approval and verified cost.",
+      "Wait for Tauhid's preference; no fulfillment decision or customer commitment is made yet."
+    ],
+    "recommended_option": "Draft a reply explaining that size S is unavailable and offering M/L/XL or asking whether Tauhid wants the shop to look into a size S reprint. Wait for the customer's preference before making a fulfillment commitment.",
+    "proposed_actions": [
+      {
+        "kind": "customer_reply",
+        "description": "Draft for human review: Hi Tauhid, thanks for reaching out about the Bulldog tee. We\u2019re currently out of size S. We do have sizes M, L, and XL available if you\u2019d like to consider one of those. We can also look into reprinting size S; the vendor\u2019s stated lead time is 5 days, but we can\u2019t confirm a calendar arrival date yet. Please let us know whether you\u2019d prefer an available size or would like us to check on the size S reprint. Any reprint would need confirmation before we can promise timing. We don\u2019t have a customer price or discount confirmed in the information available, so we\u2019ll verify that separately before quoting one. Best, Campus Customs",
+        "amount": null,
+        "payee": null,
+        "ref": null,
+        "requires_human_approval": true,
+        "status": "proposed"
+      }
+    ],
+    "customer_reply_draft": {
+      "to": "Tauhid Zaman",
+      "subject": "Bulldog tee size S",
+      "body": "Hi Tauhid, thanks for reaching out about the Bulldog tee. We\u2019re currently out of size S. We do have sizes M, L, and XL available if you\u2019d like to consider one of those. We can also look into reprinting size S; the vendor\u2019s stated lead time is 5 days, but we can\u2019t confirm a calendar arrival date yet. Please let us know whether you\u2019d prefer an available size or would like us to check on the size S reprint. Any reprint would need confirmation before we can promise timing. We don\u2019t have a customer price or discount confirmed in the information available, so we\u2019ll verify that separately before quoting one. Best, Campus Customs",
+      "sent": false,
+      "note": "Draft only. Not sent. A human must review and send it."
+    },
+    "open_questions": [
+      "Would Tauhid accept size M, L, or XL, or prefer size S only?",
+      "If Tauhid wants size S, what is the verified restock cost and is the shop willing to approve an order?",
+      "What is the customer's selling price, if a price quote is needed?"
+    ],
+    "rule_checks": [
+      {
+        "rule": "Proposal is for the requested ticket",
+        "passed": true,
+        "detail": "requested #101, proposal says #101"
+      },
+      {
+        "rule": "Payments and other consequential actions require human approval",
+        "passed": true,
+        "detail": "1 consequential action(s); all marked requires_human_approval and status 'proposed'. Nothing was executed."
+      },
+      {
+        "rule": "Cash must never go negative",
+        "passed": true,
+        "detail": "No cash outflow proposed for this ticket."
+      },
+      {
+        "rule": "No real customers or vendors are contacted",
+        "passed": true,
+        "detail": "The system has no send, email, or ordering tools; the customer reply is a draft (sent=false)."
+      }
+    ],
+    "approval_status": "pending_human_approval",
+    "run_id": "b0286d37ec2e"
+  },
+  "102": {
+    "ticket_id": 102,
+    "ticket_type": "rent_notice",
+    "summary": "The notice\u2019s claim is confirmed: lease 1 rent of $2,400.00 for the Chapel Street shop is due to Elm City Properties on 2026-09-02, two days after the desk date (2026-08-31). No rent payment is recorded. Accounting projects that paying rent and the already-overdue $840.00 invoice 501 would leave $160.00, keeping cash non-negative. Payment requires human approval.",
+    "delegated_to": [
+      "facilities",
+      "accounting"
+    ],
+    "key_facts": [
+      {
+        "label": "Desk date",
+        "value": "2026-08-31",
+        "source": "get_ticket"
+      },
+      {
+        "label": "Lease space",
+        "value": "Chapel Street shop",
+        "source": "facilities"
+      },
+      {
+        "label": "Rent and due date",
+        "value": "$2,400.00 due 2026-09-02",
+        "source": "facilities"
+      },
+      {
+        "label": "Payee",
+        "value": "Elm City Properties",
+        "source": "facilities"
+      },
+      {
+        "label": "Rent payment history",
+        "value": "No payments found for lease 1",
+        "source": "facilities"
+      },
+      {
+        "label": "Checking balance",
+        "value": "$3,400.00 as of 2026-08-31",
+        "source": "accounting"
+      },
+      {
+        "label": "Other open obligation",
+        "value": "Invoice 501: $840.00, due 2026-08-28, 3 days overdue",
+        "source": "accounting"
+      },
+      {
+        "label": "Combined projection",
+        "value": "After rent and invoice 501, projected cash is $160.00; remains non-negative",
+        "source": "accounting"
+      }
+    ],
+    "options": [
+      "Propose paying lease 1 rent by its due date, subject to human approval; the projection including invoice 501 stays non-negative.",
+      "Wait or defer payment; this risks missing the 2026-09-02 due date.",
+      "Prioritize the overdue invoice instead, or seek human guidance on payment timing; no alternative cash plan was supplied."
+    ],
+    "recommended_option": "Propose paying the $2,400.00 rent to Elm City Properties for lease 1 by 2026-09-02, subject to human approval. The Accounting projection includes the overdue invoice 501 and leaves $160.00.",
+    "proposed_actions": [
+      {
+        "kind": "payment",
+        "description": "Pay monthly rent for the Chapel Street shop by the 2026-09-02 due date.",
+        "amount": 2400.0,
+        "payee": "Elm City Properties",
+        "ref": "lease 1",
+        "requires_human_approval": true,
+        "status": "proposed"
+      }
+    ],
+    "customer_reply_draft": null,
+    "open_questions": [
+      "A human must approve and determine payment timing; no payment is executed or scheduled."
+    ],
+    "rule_checks": [
+      {
+        "rule": "Proposal is for the requested ticket",
+        "passed": true,
+        "detail": "requested #102, proposal says #102"
+      },
+      {
+        "rule": "Payments and other consequential actions require human approval",
+        "passed": true,
+        "detail": "1 consequential action(s); all marked requires_human_approval and status 'proposed'. Nothing was executed."
+      },
+      {
+        "rule": "Cash must never go negative",
+        "passed": true,
+        "detail": "Projected via MCP project_cash_balance: start $3,400.00, outflows $2,400.00 (incl. 0 earlier batch proposal(s)), end $1,000.00."
+      },
+      {
+        "rule": "No real customers or vendors are contacted",
+        "passed": true,
+        "detail": "The system has no send, email, or ordering tools; no customer reply was drafted."
+      }
+    ],
+    "approval_status": "pending_human_approval",
+    "run_id": "5c66edf270c9"
+  },
+  "103": {
+    "ticket_id": 103,
+    "ticket_type": "price_override",
+    "summary": "Yale AI Club requests 20 CC-HOOD-NAVY hoodies in size M with a bulk discount. Inventory has 8 size M on hand, so 12 more are needed to fill the request; sourcing is estimated at 5 days. Accounting verified a list price of $58 each ($1,160 total) and provided illustrative discount scenarios, but no discount is authorized. Recommend presenting the list-price quote and asking whether the club wants a discount request submitted for human review; do not promise availability or a discount.",
+    "delegated_to": [
+      "customer_service",
+      "accounting",
+      "inventory"
+    ],
+    "key_facts": [
+      {
+        "label": "Desk date",
+        "value": "2026-08-31",
+        "source": "get_ticket"
+      },
+      {
+        "label": "Request",
+        "value": "20 CC-HOOD-NAVY hoodies, size M; bulk discount requested",
+        "source": "get_ticket"
+      },
+      {
+        "label": "Size M stock and shortfall",
+        "value": "8 on hand; shortfall of 12",
+        "source": "inventory"
+      },
+      {
+        "label": "Other sizes on hand",
+        "value": "S: 4; L: 14; XL: 6",
+        "source": "inventory"
+      },
+      {
+        "label": "Reprint lead time",
+        "value": "Bulldog Print Co; 5 days; estimated earliest arrival 2026-09-05",
+        "source": "inventory"
+      },
+      {
+        "label": "List pricing",
+        "value": "$58.00 each; $1,160.00 total for 20",
+        "source": "accounting"
+      },
+      {
+        "label": "Illustrative 5% discount",
+        "value": "$55.10 each; $1,102.00 total; $662.00 gross profit; 60.1% margin",
+        "source": "accounting"
+      },
+      {
+        "label": "Illustrative 10% discount",
+        "value": "$52.20 each; $1,044.00 total; $604.00 gross profit; 57.9% margin",
+        "source": "accounting"
+      },
+      {
+        "label": "Discount authority",
+        "value": "No discount is authorized; any discount requires human approval",
+        "source": "accounting"
+      }
+    ],
+    "options": [
+      "Offer a list-price quote for 20 at $58 each, subject to resolving the 12-unit size M shortfall.",
+      "Submit an illustrative discount request for human review (5% or 10% scenarios); do not represent either as approved.",
+      "Offer available size alternatives if the customer is flexible; current counts do not establish a mixed-size order that meets their request.",
+      "Wait for the customer to choose a path and for a human to approve any discount or restock."
+    ],
+    "recommended_option": "Send the draft list-price quote and ask whether Yale AI Club wants the bulk discount request submitted for human review; clarify that 12 size M units are currently short and would require sourcing. No discount or restock is committed.",
+    "proposed_actions": [
+      {
+        "kind": "customer_reply",
+        "description": "Draft response to acknowledge request, provide the verified $58.00 unit list quote ($1,160.00 for 20), and ask whether they want a discount request reviewed. Mention that 12 size M units are currently short and sourcing would be needed.",
+        "amount": null,
+        "payee": null,
+        "ref": null,
+        "requires_human_approval": true,
+        "status": "proposed"
+      },
+      {
+        "kind": "discount_offer",
+        "description": "Optional illustrative 5% discount scenario for human decision only: $55.10 each, $1,102.00 total for 20. This is not an authorized offer.",
+        "amount": 58.0,
+        "payee": null,
+        "ref": "CC-HOOD-NAVY, qty 20, illustrative 5% discount",
+        "requires_human_approval": true,
+        "status": "proposed"
+      },
+      {
+        "kind": "restock_order",
+        "description": "Consider sourcing 12 additional CC-HOOD-NAVY size M units to cover the shortfall; vendor listing indicates a 5-day lead time. Cost was not verified, so this is not ready for approval as an order.",
+        "amount": null,
+        "payee": null,
+        "ref": "CC-HOOD-NAVY size M",
+        "requires_human_approval": true,
+        "status": "blocked_by_guardrail"
+      }
+    ],
+    "customer_reply_draft": {
+      "to": "Yale AI Club",
+      "subject": "Bulk hoodie request",
+      "body": "Hello Yale AI Club,\n\nThanks for reaching out about 20 CC-HOOD-NAVY hoodies in size M. The verified list quote is $58.00 each, or $1,160.00 before any discount. We currently have 8 in size M, so 12 would need to be sourced; the listed reprint lead time is 5 days. Any discount would need review and approval before we can offer it. Would you like us to submit your bulk-discount request for review, or proceed with the list-price quote subject to sourcing the remaining units?\n\nBest,\nCampus Customs",
+      "sent": false,
+      "note": "Draft only. Not sent. A human must review and send it."
+    },
+    "open_questions": [
+      "Does a human approve any discount, and if so, which amount?",
+      "Does Yale AI Club accept the estimated sourcing wait for the 12-unit size M shortfall, or want to consider a different size mix?",
+      "What is the verified cost and final payable amount for sourcing 12 size M units? The inventory report did not provide an order amount, so no order can be approved yet.",
+      "Customer Service notes size-specific pricing was not independently confirmed; confirm size M pricing if required before final quote."
+    ],
+    "rule_checks": [
+      {
+        "rule": "Proposal is for the requested ticket",
+        "passed": true,
+        "detail": "requested #103, proposal says #103"
+      },
+      {
+        "rule": "Payments and other consequential actions require human approval",
+        "passed": true,
+        "detail": "3 consequential action(s); all marked requires_human_approval and status 'proposed'. Nothing was executed."
+      },
+      {
+        "rule": "Cash outflows have a verifiable amount",
+        "passed": false,
+        "detail": "Blocked 'Consider sourcing 12 additional CC-HOOD-NAVY size M units to cover the shortfall; vendor listing indicates a 5-day lead time. Cost was not verified, so this is not ready for approval as an order.': no positive amount, so the cash rule can't be checked."
+      },
+      {
+        "rule": "Cash must never go negative",
+        "passed": true,
+        "detail": "No cash outflow proposed for this ticket."
+      },
+      {
+        "rule": "No real customers or vendors are contacted",
+        "passed": true,
+        "detail": "The system has no send, email, or ordering tools; the customer reply is a draft (sent=false)."
+      }
+    ],
+    "approval_status": "pending_human_approval",
+    "run_id": "5a2a491de789"
+  }
+}

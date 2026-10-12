@@ -1,0 +1,64 @@
+{
+  "problem": 4,
+  "date": "2026-10-11",
+  "session": "New Claude Code desktop (Code tab) session started in AI Foundations, launched from Claude-drafted task chip task_8fc0b31d",
+  "connection": {
+    "check": "mcp__ccd_connectors__session_connectors_status",
+    "result": {"name": "campus-customs", "kind": "project", "transport": "stdio", "status": "connected", "tool_count": 3},
+    "tools_exposed": [
+      "mcp__campus-customs__check_stock",
+      "mcp__campus-customs__get_rent_due",
+      "mcp__campus-customs__quote_bulk_order"
+    ]
+  },
+  "verification_db": "data/campus_customs_new.db (opened with sqlite3 -readonly)",
+  "original_db_sha256_after_tests": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt": "Can ticket #101 be filled? Check stock for 1 CC-TEE-WHITE in size S.",
+      "tool": "mcp__campus-customs__check_stock",
+      "arguments": {"sku": "CC-TEE-WHITE", "size": "S", "qty": 1},
+      "output": "{\"found\":true,\"sku\":\"CC-TEE-WHITE\",\"name\":\"Classic Bulldog Tee\",\"size\":\"S\",\"requested_qty\":1,\"on_hand\":0,\"location\":\"Aisle B\",\"can_fulfill\":false,\"shortfall\":1,\"other_sizes\":[{\"size\":\"M\",\"qty\":5,\"location\":\"Aisle B\"},{\"size\":\"L\",\"qty\":3,\"location\":\"Aisle B\"},{\"size\":\"XL\",\"qty\":2,\"location\":\"Aisle B\"}]}",
+      "verification_sql": "SELECT * FROM inventory WHERE sku='CC-TEE-WHITE';",
+      "db_values": [
+        {"sku": "CC-TEE-WHITE", "name": "Classic Bulldog Tee", "size": "L", "qty": 3, "location": "Aisle B"},
+        {"sku": "CC-TEE-WHITE", "name": "Classic Bulldog Tee", "size": "M", "qty": 5, "location": "Aisle B"},
+        {"sku": "CC-TEE-WHITE", "name": "Classic Bulldog Tee", "size": "S", "qty": 0, "location": "Aisle B"},
+        {"sku": "CC-TEE-WHITE", "name": "Classic Bulldog Tee", "size": "XL", "qty": 2, "location": "Aisle B"}
+      ],
+      "check": "S on hand 0 < 1 requested, so can_fulfill=false and shortfall=1; other sizes M=5, L=3, XL=2 match.",
+      "result": "pass"
+    },
+    {
+      "ticket": 102,
+      "prompt": "What rent is due on lease 1 for ticket #102, and when?",
+      "tool": "mcp__campus-customs__get_rent_due",
+      "arguments": {"lease_id": 1},
+      "output": "{\"found\":true,\"lease_id\":1,\"space_name\":\"Chapel Street shop\",\"landlord\":\"Elm City Properties\",\"monthly_rent\":2400,\"next_due\":\"2026-09-02\",\"desk_date\":\"2026-08-31\",\"days_until_due\":2,\"overdue\":false,\"notes\":null}",
+      "verification_sql": "SELECT * FROM leases WHERE id=1; SELECT * FROM desk; SELECT julianday(next_due)-julianday((SELECT date_today FROM desk)) AS days FROM leases WHERE id=1;",
+      "db_values": {
+        "leases": {"id": 1, "space_name": "Chapel Street shop", "landlord": "Elm City Properties", "monthly_rent": 2400.0, "next_due": "2026-09-02", "notes": null},
+        "desk": {"date_today": "2026-08-31"},
+        "days": 2.0
+      },
+      "check": "Rent $2,400 due 2026-09-02, 2 days after desk date 2026-08-31, not overdue; matches ticket 102 note 'rent due in 2 days'.",
+      "result": "pass"
+    },
+    {
+      "ticket": 103,
+      "prompt": "Quote ticket #103: 20 CC-HOOD-NAVY at list price.",
+      "tool": "mcp__campus-customs__quote_bulk_order",
+      "arguments": {"sku": "CC-HOOD-NAVY", "qty": 20, "discount_pct": 0},
+      "output": "{\"found\":true,\"sku\":\"CC-HOOD-NAVY\",\"qty\":20,\"unit_cost\":22,\"list_price\":58,\"discount_pct\":0,\"unit_price\":58,\"total_revenue\":1160,\"total_cost\":440,\"gross_profit\":720,\"margin_pct\":62.1,\"above_cost\":true}",
+      "verification_sql": "SELECT * FROM pricing WHERE sku='CC-HOOD-NAVY'; SELECT 20*list_price AS rev, 20*unit_cost AS cost, 20*(list_price-unit_cost) AS gp, ROUND(100.0*(list_price-unit_cost)/list_price,1) AS margin FROM pricing WHERE sku='CC-HOOD-NAVY';",
+      "db_values": {
+        "pricing": {"sku": "CC-HOOD-NAVY", "unit_cost": 22.0, "list_price": 58.0},
+        "computed": {"rev": 1160.0, "cost": 440.0, "gp": 720.0, "margin": 62.1}
+      },
+      "check": "Unit cost 22, list 58; 20 units = $1,160 revenue, $440 cost, $720 gross profit, 62.1% margin, above cost.",
+      "result": "pass"
+    }
+  ],
+  "summary": {"passed": 3, "failed": 0}
+}

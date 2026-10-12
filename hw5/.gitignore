@@ -1,0 +1,25 @@
+# --- secrets: never commit real environment files ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# --- Node / Vite ---
+node_modules/
+dist/
+*.local
+
+# --- local runtime files ---
+.run/
+output/.*.lock
+*.log
+.DS_Store
+
+# NOTE: data/campus_customs.db and data/campus_customs_new.db are required by the assignment
+# and are intentionally NOT ignored.

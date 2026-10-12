@@ -1,0 +1,434 @@
+{
+  "problem": 9,
+  "generated": "2026-10-11",
+  "database": "data/campus_customs_new.db",
+  "note": "Real gpt-6-luna runs through the dashboard and Problem 7 backend after a reset. Every value comes from the audit trail and the working database. All human approvals were given explicitly by the user in chat before being entered in the dashboard.",
+  "cash": {
+    "starting_balance": 3400.0,
+    "transactions": [
+      {
+        "id": 1,
+        "kind": "rent",
+        "ref_id": 1,
+        "amount": 2400.0,
+        "account": "checking",
+        "paid_at": "2026-08-31",
+        "approved_by": "Navya Sharma"
+      }
+    ],
+    "ending_balance": 1000.0,
+    "reconciles": true
+  },
+  "totals": {
+    "model_requests": 41,
+    "input_tokens": 75348,
+    "output_tokens": 10115,
+    "resolved": 3
+  },
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "final_status": "resolved",
+      "outcome": "Resolved with no money moved. Size S is out of stock (0 on hand); the team drafted (not sent) a reply offering M (5), L (3) or XL (2), or a size S reprint (Bulldog Print Co, 5-day lead time), and recommended waiting for the customer's choice. Overdue invoice 501 ($840) was reviewed but not proposed for payment, so it remains open.",
+      "run": {
+        "run_id": "b0286d37ec2e",
+        "model": "gpt-6-luna",
+        "model_requests": 14,
+        "input_tokens": 22911,
+        "output_tokens": 3366,
+        "audit_seq": [
+          201,
+          257
+        ],
+        "started": "2026-10-12T00:02:00.164+00:00",
+        "ended": "2026-10-12T00:02:31.476+00:00"
+      },
+      "delegations": [
+        "boss -> inventory",
+        "boss -> customer_service",
+        "customer_service -> inventory",
+        "customer_service -> accounting"
+      ],
+      "agents_not_called": [
+        "facilities"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "asked_by": [],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "reports": [
+            "Tauhid Zaman requests one CC-TEE-WHITE Bulldog tee in size S. Size S is out of stock, so the order cannot be fulfilled as requested now. Sizes M, L, and XL are available alternatives. A size S reprint is possible to consider, with a stated five-day vendor lead time, but no confirmed calendar arrival date or verified restock cost is available. Invoice 501 is a vendor payable, not a customer selling price."
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "asked_by": [
+            "boss"
+          ],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "reports": [
+            "Tauhid Zaman requests one CC-TEE-WHITE Bulldog tee in size S. Size S is currently out of stock; sizes M, L, and XL are available as alternatives, and a vendor reprint has a 5-day lead time, but no confirmed calendar arrival date. Invoice 501 is an open vendor payable, not a customer order price record, so no customer price or discount can be quoted from it."
+          ]
+        },
+        {
+          "agent": "inventory",
+          "asked_by": [
+            "boss",
+            "customer_service"
+          ],
+          "model_steps": 6,
+          "mcp_tools": [
+            "check_stock",
+            "list_vendors",
+            "check_stock",
+            "list_vendors"
+          ],
+          "reports": [
+            "The requested Classic Bulldog Tee in size S cannot be fulfilled: on-hand stock is 0 against 1 requested, leaving a shortfall of 1. Sizes M, L, and XL are available as alternatives; an apparel reprint vendor has a 5-day lead time, but no desk date was provided to calculate an arrival date.",
+            "CC-TEE-WHITE size S cannot fulfill the requested quantity of 1: on hand is 0, with a shortfall of 1. Other sizes are available; the apparel reprint vendor has a 5-day lead time, but no calendar arrival date can be stated without a desk date."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "asked_by": [
+            "customer_service"
+          ],
+          "model_steps": 2,
+          "mcp_tools": [
+            "get_invoice",
+            "list_payments",
+            "list_open_invoices"
+          ],
+          "reports": [
+            "Invoice 501 is open and overdue: Bulldog Print Co\u2019s $840.00 invoice for a rush reprint of CC-TEE-WHITE S was due 2026-08-28. No payment is recorded, so the full $840.00 remains due; the invoice does not record an item selling price or any customer discount offer/limit."
+          ]
+        }
+      ],
+      "proposed_actions": [
+        {
+          "kind": "customer_reply",
+          "status": "proposed",
+          "amount": null,
+          "payee": null,
+          "ref": null,
+          "description": "Draft for human review: Hi Tauhid, thanks for reaching out about the Bulldog tee. We\u2019re currently out of size S. We do have sizes M, L, and XL available if you\u2019d like to consider one of those. We can also look into reprinting size S; the vendor\u2019s stated lead time is 5 days, but we can\u2019t confirm a calendar arrival date yet. Please let us know whether you\u2019d prefer an available size or would like us to check on the size S reprint. Any reprint would need confirmation before we can promise timing. We don\u2019t have a customer price or discount confirmed in the information available, so we\u2019ll verify that separately before quoting one. Best, Campus Customs"
+        }
+      ],
+      "recommended_option": "Draft a reply explaining that size S is unavailable and offering M/L/XL or asking whether Tauhid wants the shop to look into a size S reprint. Wait for the customer's preference before making a fulfillment commitment.",
+      "rule_checks": [
+        {
+          "rule": "Proposal is for the requested ticket",
+          "passed": true
+        },
+        {
+          "rule": "Payments and other consequential actions require human approval",
+          "passed": true
+        },
+        {
+          "rule": "Cash must never go negative",
+          "passed": true
+        },
+        {
+          "rule": "No real customers or vendors are contacted",
+          "passed": true
+        }
+      ],
+      "human_approvals": [
+        {
+          "type": "resolution",
+          "approved_by": "Navya Sharma",
+          "proposal_run_id": "b0286d37ec2e",
+          "money_moved": false,
+          "left_unpaid": [],
+          "audit_seq": 320,
+          "ts": "2026-10-12T00:07:11.666+00:00"
+        }
+      ],
+      "cash_impact": 0
+    },
+    {
+      "ticket_id": 102,
+      "final_status": "resolved",
+      "outcome": "Resolved by paying rent. Facilities and Accounting verified lease 1 ($2,400.00 due 2026-09-02, unpaid) and projected cash stays non-negative ($160 even with invoice 501). A human approved the $2,400.00 rent payment to Elm City Properties; checking went $3,400.00 -> $1,000.00.",
+      "run": {
+        "run_id": "5c66edf270c9",
+        "model": "gpt-6-luna",
+        "model_requests": 12,
+        "input_tokens": 23235,
+        "output_tokens": 2370,
+        "audit_seq": [
+          258,
+          318
+        ],
+        "started": "2026-10-12T00:03:08.672+00:00",
+        "ended": "2026-10-12T00:03:35.161+00:00"
+      },
+      "delegations": [
+        "boss -> facilities",
+        "boss -> accounting",
+        "facilities -> accounting"
+      ],
+      "agents_not_called": [
+        "customer_service",
+        "inventory"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "asked_by": [],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "reports": [
+            "The notice\u2019s claim is confirmed: lease 1 rent of $2,400.00 for the Chapel Street shop is due to Elm City Properties on 2026-09-02, two days after the desk date (2026-08-31). No rent payment is recorded. Accounting projects that paying rent and the already-overdue $840.00 invoice 501 would leave $160.00, keeping cash non-negative. Payment requires human approval."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "asked_by": [
+            "boss",
+            "facilities"
+          ],
+          "model_steps": 6,
+          "mcp_tools": [
+            "get_cash_position",
+            "get_rent_due",
+            "list_payments",
+            "list_open_invoices",
+            "project_cash_balance",
+            "get_cash_position",
+            "list_open_invoices",
+            "get_rent_due",
+            "list_payments",
+            "project_cash_balance"
+          ],
+          "reports": [
+            "Checking has $3,400 as of 2026-08-31. Lease 1 rent of $2,400 is due 2026-09-02 (in 2 days), and no rent payment is recorded; paying it leaves $1,000. Including the $840 overdue vendor invoice, the combined projection remains non-negative at $160, so rent can be paid without making cash negative, subject to human approval.",
+            "Checking has $3,400.00 as of 2026-08-31. Paying lease 1 rent of $2,400.00 and accounting for the sole open invoice of $840.00 (overdue) leaves projected cash of $160.00, so the rent payment keeps the balance non-negative; no payment has been made."
+          ]
+        },
+        {
+          "agent": "facilities",
+          "asked_by": [
+            "boss"
+          ],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_rent_due",
+            "list_payments"
+          ],
+          "reports": [
+            "Lease 1 is for the Chapel Street shop, with monthly rent of $2,400.00 payable to Elm City Properties on 2026-09-02, two days after the 2026-08-31 desk date. The rent notice\u2019s amount/timing claim matches the lease record, no rent payment is recorded, and Accounting reports that rent plus the open invoice would leave projected cash of $160.00."
+          ]
+        }
+      ],
+      "proposed_actions": [
+        {
+          "kind": "payment",
+          "status": "proposed",
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "ref": "lease 1",
+          "description": "Pay monthly rent for the Chapel Street shop by the 2026-09-02 due date."
+        }
+      ],
+      "recommended_option": "Propose paying the $2,400.00 rent to Elm City Properties for lease 1 by 2026-09-02, subject to human approval. The Accounting projection includes the overdue invoice 501 and leaves $160.00.",
+      "rule_checks": [
+        {
+          "rule": "Proposal is for the requested ticket",
+          "passed": true
+        },
+        {
+          "rule": "Payments and other consequential actions require human approval",
+          "passed": true
+        },
+        {
+          "rule": "Cash must never go negative",
+          "passed": true
+        },
+        {
+          "rule": "No real customers or vendors are contacted",
+          "passed": true
+        }
+      ],
+      "human_approvals": [
+        {
+          "type": "payment",
+          "approved_by": "Navya Sharma",
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "payment_kind": "rent",
+          "ref": "lease 1",
+          "payment_id": 1,
+          "balance_before": 3400.0,
+          "balance_after": 1000.0,
+          "ticket_status": "resolved",
+          "audit_seq": 319,
+          "ts": "2026-10-12T00:06:15.308+00:00"
+        }
+      ],
+      "cash_impact": -2400.0
+    },
+    {
+      "ticket_id": 103,
+      "final_status": "resolved",
+      "outcome": "Resolved with no money moved. 8 of 20 size M hoodies on hand (12 short; apparel sourcing ~5 days, earliest 2026-09-05). The team drafted (not sent) a list-price quote ($58 each, $1,160 for 20) and asked whether the club wants a discount reviewed; an illustrative 5% discount was left as a human decision and not granted. The 12-unit restock was blocked by the cash guardrail (no verified cost), so nothing was ordered.",
+      "run": {
+        "run_id": "5a2a491de789",
+        "model": "gpt-6-luna",
+        "model_requests": 15,
+        "input_tokens": 29202,
+        "output_tokens": 4379,
+        "audit_seq": [
+          321,
+          391
+        ],
+        "started": "2026-10-12T00:07:30.234+00:00",
+        "ended": "2026-10-12T00:08:01.667+00:00"
+      },
+      "delegations": [
+        "boss -> customer_service",
+        "boss -> accounting",
+        "boss -> inventory",
+        "customer_service -> accounting"
+      ],
+      "agents_not_called": [
+        "facilities"
+      ],
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "asked_by": [],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "reports": [
+            "Yale AI Club requests 20 CC-HOOD-NAVY hoodies in size M with a bulk discount. Inventory has 8 size M on hand, so 12 more are needed to fill the request; sourcing is estimated at 5 days. Accounting verified a list price of $58 each ($1,160 total) and provided illustrative discount scenarios, but no discount is authorized. Recommend presenting the list-price quote and asking whether the club wants a discount request submitted for human review; do not promise availability or a discount."
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "asked_by": [
+            "boss"
+          ],
+          "model_steps": 3,
+          "mcp_tools": [
+            "get_ticket"
+          ],
+          "reports": [
+            "Yale AI Club requests 20 CC-HOOD-NAVY hoodies in size M and asks for a bulk discount. Accounting verified a list price of $58.00 each ($1,160.00 total before discount) for quantity 20, but size-specific pricing was not independently confirmed; no discount was applied. A reply can acknowledge the request, state the verified bulk-quantity list quote, and ask whether they would like the quote as-is or want the shop to review a discount request; any discount is subject to human approval."
+          ]
+        },
+        {
+          "agent": "inventory",
+          "asked_by": [
+            "boss"
+          ],
+          "model_steps": 3,
+          "mcp_tools": [
+            "check_stock",
+            "list_vendors"
+          ],
+          "reports": [
+            "The requested 20 navy hoodies in size M cannot be filled from current stock: 8 are on hand, leaving a shortfall of 12. Apparel reprint sourcing has a 5-day lead time, which gives an estimated earliest arrival of September 5, 2026; other sizes are available if the customer can consider alternatives."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "asked_by": [
+            "boss",
+            "customer_service"
+          ],
+          "model_steps": 6,
+          "mcp_tools": [
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "get_cash_position",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order",
+            "quote_bulk_order"
+          ],
+          "reports": [
+            "Verified pricing for 20 CC-HOOD-NAVY hoodies: list price is $58 each ($1,160 total), with $22 unit cost and $440 total cost. Illustrative 5% and 10% discounts both remain well above cost, but no discount is authorized by the information provided; obtain human approval before offering one.",
+            "Verified pricing for CC-HOOD-NAVY, quantity 20: $58.00 list/unit, $1,160.00 total before discount, with $22.00 unit cost. Discounts of 10% and 20% remain above cost; 60% technically remains above cost but leaves only $24.00 gross profit (5.2% margin), while 62.07% reaches cost and 62.1% goes below cost, so neither meets the no-below-cost rule. No price or offer was applied; any discount offer requires human approval."
+          ]
+        }
+      ],
+      "proposed_actions": [
+        {
+          "kind": "customer_reply",
+          "status": "proposed",
+          "amount": null,
+          "payee": null,
+          "ref": null,
+          "description": "Draft response to acknowledge request, provide the verified $58.00 unit list quote ($1,160.00 for 20), and ask whether they want a discount request reviewed. Mention that 12 size M units are currently short and sourcing would be needed."
+        },
+        {
+          "kind": "discount_offer",
+          "status": "proposed",
+          "amount": 58.0,
+          "payee": null,
+          "ref": "CC-HOOD-NAVY, qty 20, illustrative 5% discount",
+          "description": "Optional illustrative 5% discount scenario for human decision only: $55.10 each, $1,102.00 total for 20. This is not an authorized offer."
+        },
+        {
+          "kind": "restock_order",
+          "status": "blocked_by_guardrail",
+          "amount": null,
+          "payee": null,
+          "ref": "CC-HOOD-NAVY size M",
+          "description": "Consider sourcing 12 additional CC-HOOD-NAVY size M units to cover the shortfall; vendor listing indicates a 5-day lead time. Cost was not verified, so this is not ready for approval as an order."
+        }
+      ],
+      "recommended_option": "Send the draft list-price quote and ask whether Yale AI Club wants the bulk discount request submitted for human review; clarify that 12 size M units are currently short and would require sourcing. No discount or restock is committed.",
+      "rule_checks": [
+        {
+          "rule": "Proposal is for the requested ticket",
+          "passed": true
+        },
+        {
+          "rule": "Payments and other consequential actions require human approval",
+          "passed": true
+        },
+        {
+          "rule": "Cash outflows have a verifiable amount",
+          "passed": false
+        },
+        {
+          "rule": "Cash must never go negative",
+          "passed": true
+        },
+        {
+          "rule": "No real customers or vendors are contacted",
+          "passed": true
+        }
+      ],
+      "human_approvals": [
+        {
+          "type": "resolution",
+          "approved_by": "Navya Sharma",
+          "proposal_run_id": "5a2a491de789",
+          "money_moved": false,
+          "left_unpaid": [],
+          "audit_seq": 392,
+          "ts": "2026-10-12T00:09:07.407+00:00"
+        }
+      ],
+      "cash_impact": 0
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Homework 5: Campus Customs multi-agent system (Python 3.14 tested)
+# MCP server, agents, and FastAPI backend
+pydantic-ai-slim[openai,mcp]>=2.55
+python-dotenv>=1.0
+fastmcp>=4.1
+fastapi>=0.143
+uvicorn>=0.54
+# tests only
+pytest>=8
+httpx>=0.28

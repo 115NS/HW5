@@ -1,0 +1,230 @@
+[
+  {
+    "tool": "check_stock",
+    "args": {
+      "sku": "CC-TEE-WHITE",
+      "size": "S",
+      "qty": 1
+    },
+    "result": {
+      "found": true,
+      "sku": "CC-TEE-WHITE",
+      "name": "Classic Bulldog Tee",
+      "size": "S",
+      "requested_qty": 1,
+      "on_hand": 0,
+      "location": "Aisle B",
+      "can_fulfill": false,
+      "shortfall": 1,
+      "other_sizes": [
+        {
+          "size": "M",
+          "qty": 5,
+          "location": "Aisle B"
+        },
+        {
+          "size": "L",
+          "qty": 3,
+          "location": "Aisle B"
+        },
+        {
+          "size": "XL",
+          "qty": 2,
+          "location": "Aisle B"
+        }
+      ]
+    }
+  },
+  {
+    "tool": "check_stock",
+    "args": {
+      "sku": "CC-HOOD-NAVY",
+      "size": "M",
+      "qty": 20
+    },
+    "result": {
+      "found": true,
+      "sku": "CC-HOOD-NAVY",
+      "name": "Basic Hoodie Big Yale",
+      "size": "M",
+      "requested_qty": 20,
+      "on_hand": 8,
+      "location": "Aisle A",
+      "can_fulfill": false,
+      "shortfall": 12,
+      "other_sizes": [
+        {
+          "size": "S",
+          "qty": 4,
+          "location": "Aisle A"
+        },
+        {
+          "size": "L",
+          "qty": 14,
+          "location": "Aisle A"
+        },
+        {
+          "size": "XL",
+          "qty": 6,
+          "location": "Aisle A"
+        }
+      ]
+    }
+  },
+  {
+    "tool": "check_stock",
+    "args": {
+      "sku": "NOPE",
+      "size": "S"
+    },
+    "result": {
+      "found": false,
+      "sku": "NOPE",
+      "error": "No inventory rows for SKU 'NOPE'."
+    }
+  },
+  {
+    "tool": "check_stock",
+    "args": {
+      "sku": "CC-TEE-WHITE",
+      "size": "XXL"
+    },
+    "result": {
+      "found": false,
+      "sku": "CC-TEE-WHITE",
+      "name": "Classic Bulldog Tee",
+      "error": "Size 'XXL' is not stocked for CC-TEE-WHITE.",
+      "other_sizes": [
+        {
+          "size": "S",
+          "qty": 0,
+          "location": "Aisle B"
+        },
+        {
+          "size": "M",
+          "qty": 5,
+          "location": "Aisle B"
+        },
+        {
+          "size": "L",
+          "qty": 3,
+          "location": "Aisle B"
+        },
+        {
+          "size": "XL",
+          "qty": 2,
+          "location": "Aisle B"
+        }
+      ]
+    }
+  },
+  {
+    "tool": "get_rent_due",
+    "args": {
+      "lease_id": 1
+    },
+    "result": {
+      "found": true,
+      "lease_id": 1,
+      "space_name": "Chapel Street shop",
+      "landlord": "Elm City Properties",
+      "monthly_rent": 2400.0,
+      "next_due": "2026-09-02",
+      "desk_date": "2026-08-31",
+      "days_until_due": 2,
+      "overdue": false,
+      "notes": null
+    }
+  },
+  {
+    "tool": "get_rent_due",
+    "args": {
+      "lease_id": 9
+    },
+    "result": {
+      "found": false,
+      "lease_id": 9,
+      "error": "No lease with id 9."
+    }
+  },
+  {
+    "tool": "quote_bulk_order",
+    "args": {
+      "sku": "CC-HOOD-NAVY",
+      "qty": 20
+    },
+    "result": {
+      "found": true,
+      "sku": "CC-HOOD-NAVY",
+      "qty": 20,
+      "unit_cost": 22.0,
+      "list_price": 58.0,
+      "discount_pct": 0.0,
+      "unit_price": 58.0,
+      "total_revenue": 1160.0,
+      "total_cost": 440.0,
+      "gross_profit": 720.0,
+      "margin_pct": 62.1,
+      "above_cost": true
+    }
+  },
+  {
+    "tool": "quote_bulk_order",
+    "args": {
+      "sku": "CC-HOOD-NAVY",
+      "qty": 20,
+      "discount_pct": 10
+    },
+    "result": {
+      "found": true,
+      "sku": "CC-HOOD-NAVY",
+      "qty": 20,
+      "unit_cost": 22.0,
+      "list_price": 58.0,
+      "discount_pct": 10.0,
+      "unit_price": 52.2,
+      "total_revenue": 1044.0,
+      "total_cost": 440.0,
+      "gross_profit": 604.0,
+      "margin_pct": 57.9,
+      "above_cost": true
+    }
+  },
+  {
+    "tool": "quote_bulk_order",
+    "args": {
+      "sku": "CC-HOOD-NAVY",
+      "qty": 0
+    },
+    "result": {
+      "found": false,
+      "sku": "CC-HOOD-NAVY",
+      "error": "qty must be positive."
+    }
+  },
+  {
+    "tool": "quote_bulk_order",
+    "args": {
+      "sku": "CC-HOOD-NAVY",
+      "qty": 5,
+      "discount_pct": 100
+    },
+    "result": {
+      "found": false,
+      "sku": "CC-HOOD-NAVY",
+      "error": "discount_pct must be from 0 up to (not including) 100."
+    }
+  },
+  {
+    "tool": "quote_bulk_order",
+    "args": {
+      "sku": "NOPE",
+      "qty": 5
+    },
+    "result": {
+      "found": false,
+      "sku": "NOPE",
+      "error": "No pricing for SKU 'NOPE'."
+    }
+  }
+]

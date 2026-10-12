@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resolved board: Campus Customs (HW5 Problem 9)</title>
+<style>
+  body { margin: 0; font: 15px/1.55 system-ui, -apple-system, 'Segoe UI', sans-serif; color: #16213a; background: #f3efe6; }
+  header.top { background: linear-gradient(180deg,#0c2a52,#0a1f3d); color: #f4f1ea; padding: 22px 28px; border-bottom: 3px solid #b7862a; }
+  header.top h1 { margin: 0 0 4px; font: 600 24px Georgia, serif; }
+  header.top p { margin: 0; opacity: .85; }
+  main { max-width: 1180px; margin: 0 auto; padding: 22px 24px 60px; }
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .stat { background: #fffdf8; border: 1px solid #e2dbcc; border-radius: 12px; padding: 12px 14px; }
+  .stat b { display: block; font: 600 24px Georgia, serif; }
+  .stat span { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #6b7489; }
+  .ticket { background: #fffdf8; border: 1px solid #e2dbcc; border-radius: 14px; padding: 18px 20px; margin: 18px 0; }
+  .ticket header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .ticket h2 { margin: 0; font: 600 20px Georgia, serif; }
+  .pill { background: #e3f3e8; color: #17803d; font-weight: 700; font-size: 12px; padding: 3px 10px; border-radius: 999px; }
+  .cash { margin-left: auto; font: 600 16px Georgia, serif; } .cash.neg { color: #b42318; }
+  dl { display: grid; gap: 4px; margin: 10px 0 14px; font-size: 14px; } dl div { display: grid; grid-template-columns: 110px 1fr; gap: 8px; }
+  dt { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #6b7489; padding-top: 3px; } dd { margin: 0; } dd ul { margin: 0; padding-left: 18px; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+  figure { margin: 0; background: #fff; border: 1px solid #e2dbcc; border-radius: 10px; overflow: hidden; }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { padding: 8px 10px; font-size: 12.5px; color: #3a4560; }
+  .shots figure:first-child { grid-column: 1 / -1; }
+  table { border-collapse: collapse; width: 100%; background: #fff; font-size: 14px; } th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #e2dbcc; } th { background: #eef2f7; color: #00356b; }
+  code { font: 13px ui-monospace, Menlo, monospace; background: #eef2f7; padding: 1px 5px; border-radius: 4px; }
+  .note { font-size: 13px; color: #6b7489; }
+</style></head>
+<body>
+<header class="top">
+  <h1>Resolved board: Campus Customs Operations Desk</h1>
+  <p>Homework 5, Problem 9. Tickets #101, #102 and #103 resolved through the React dashboard and the Problem 7 backend, 2026-10-11.</p>
+</header>
+<main>
+  <div class="summary">
+    <div class="stat"><span>Tickets resolved</span><b>3 / 3</b></div>
+    <div class="stat"><span>Checking</span><b>$3,400.00 → $1,000.00</b></div>
+    <div class="stat"><span>Model requests</span><b>41</b></div>
+    <div class="stat"><span>Tokens (in / out)</span><b>75,348 / 10,115</b></div>
+  </div>
+  <table>
+    <tr><th>Ticket</th><th>Status</th><th>Human decision</th><th>Cash impact</th></tr>
+    <tr><td>#101</td><td>Resolved</td><td>Resolution approved (no payment proposed)</td><td>$0.00</td></tr>
+    <tr><td>#102</td><td>Resolved</td><td>$2,400.00 rent payment approved, payment #1</td><td>−$2,400.00</td></tr>
+    <tr><td>#103</td><td>Resolved</td><td>Resolution approved (restock blocked by guardrail; discount not granted)</td><td>$0.00</td></tr>
+    <tr><th colspan="3">$3,400.00 − $2,400.00 = $1,000.00 (matches <code>cash_accounts</code>)</th><th>−$2,400.00</th></tr>
+  </table>
+  
+<section class="ticket" id="t101">
+  <header>
+    <h2>#101 · Bulldog tee (size S)</h2>
+    <span class="pill">Resolved</span>
+    <span class="cash ">cash $0.00</span>
+  </header>
+  <p>Resolved with no money moved. Size S is out of stock (0 on hand); the team drafted (not sent) a reply offering M (5), L (3) or XL (2), or a size S reprint (Bulldog Print Co, 5-day lead time), and recommended waiting for the customer&#x27;s choice. Overdue invoice 501 ($840) was reviewed but not proposed for payment, so it remains open.</p>
+  <dl>
+    <div><dt>Run</dt><dd><code>b0286d37ec2e</code> · gpt-6-luna · 14 model requests · 22,911 in / 3,366 out tokens</dd></div>
+    <div><dt>Delegations</dt><dd>boss -&gt; inventory · boss -&gt; customer_service · customer_service -&gt; inventory · customer_service -&gt; accounting</dd></div>
+    <div><dt>Not called</dt><dd>facilities</dd></div>
+    <div><dt>Human</dt><dd><ul><li>Resolution approved by Navya Sharma: no money moved (audit seq 320)</li></ul></dd></div>
+  </dl>
+  <div class="shots"><figure><a href="screenshots/101_resolved.jpg"><img src="screenshots/101_resolved.jpg" alt="Resolved in the dashboard: Resolved pill, “resolved by a human” chip, the reply draft as the only proposed action, checking unchanged at $1,000.00 (after #102’s rent)." loading="lazy"></a><figcaption>Resolved in the dashboard: Resolved pill, “resolved by a human” chip, the reply draft as the only proposed action, checking unchanged at $1,000.00 (after #102’s rent).</figcaption></figure><figure><a href="screenshots/101_live.jpg"><img src="screenshots/101_live.jpg" alt="While the team worked: Boss and Customer Service working, Inventory (4 tool calls) and Accounting (3), handoffs streaming in." loading="lazy"></a><figcaption>While the team worked: Boss and Customer Service working, Inventory (4 tool calls) and Accounting (3), handoffs streaming in.</figcaption></figure><figure><a href="screenshots/101_proposal.jpg"><img src="screenshots/101_proposal.jpg" alt="Run complete: proposal and recommendation; “Nothing to approve on this proposal” (no payment or purchase)." loading="lazy"></a><figcaption>Run complete: proposal and recommendation; “Nothing to approve on this proposal” (no payment or purchase).</figcaption></figure><figure><a href="screenshots/101_resolve_dialog.jpg"><img src="screenshots/101_resolve_dialog.jpg" alt="Human-approved resolution: name, explicit confirmation, “Resolving moves no money and sends nothing.”" loading="lazy"></a><figcaption>Human-approved resolution: name, explicit confirmation, “Resolving moves no money and sends nothing.”</figcaption></figure><figure><a href="screenshots/101_report.jpg"><img src="screenshots/101_report.jpg" alt="Crew report (4 of 5 agents) and “Your decisions”: Navya Sharma approved the resolution." loading="lazy"></a><figcaption>Crew report (4 of 5 agents) and “Your decisions”: Navya Sharma approved the resolution.</figcaption></figure></div>
+</section>
+<section class="ticket" id="t102">
+  <header>
+    <h2>#102 · Rent due, Chapel Street</h2>
+    <span class="pill">Resolved</span>
+    <span class="cash neg">cash −$2,400.00</span>
+  </header>
+  <p>Resolved by paying rent. Facilities and Accounting verified lease 1 ($2,400.00 due 2026-09-02, unpaid) and projected cash stays non-negative ($160 even with invoice 501). A human approved the $2,400.00 rent payment to Elm City Properties; checking went $3,400.00 -&gt; $1,000.00.</p>
+  <dl>
+    <div><dt>Run</dt><dd><code>5c66edf270c9</code> · gpt-6-luna · 12 model requests · 23,235 in / 2,370 out tokens</dd></div>
+    <div><dt>Delegations</dt><dd>boss -&gt; facilities · boss -&gt; accounting · facilities -&gt; accounting</dd></div>
+    <div><dt>Not called</dt><dd>customer_service, inventory</dd></div>
+    <div><dt>Human</dt><dd><ul><li>Payment approved by Navya Sharma: $2,400.00 to Elm City Properties (lease 1), checking $3,400.00 → $1,000.00 (audit seq 319)</li></ul></dd></div>
+  </dl>
+  <div class="shots"><figure><a href="screenshots/102_resolved.jpg"><img src="screenshots/102_resolved.jpg" alt="Resolved: payment slip stamped “Approved by Navya Sharma · payment #1 · checking $3,400.00 → $1,000.00”; ledger shows $1,000.00." loading="lazy"></a><figcaption>Resolved: payment slip stamped “Approved by Navya Sharma · payment #1 · checking $3,400.00 → $1,000.00”; ledger shows $1,000.00.</figcaption></figure><figure><a href="screenshots/102_proposal.jpg"><img src="screenshots/102_proposal.jpg" alt="Run complete: $2,400.00 rent payment to Elm City Properties (lease 1) awaiting approval; ledger “Awaiting approval $2,400.00 · If all approved $1,000.00”." loading="lazy"></a><figcaption>Run complete: $2,400.00 rent payment to Elm City Properties (lease 1) awaiting approval; ledger “Awaiting approval $2,400.00 · If all approved $1,000.00”.</figcaption></figure><figure><a href="screenshots/102_approve_dialog.jpg"><img src="screenshots/102_approve_dialog.jpg" alt="The approval dialog after the user approved in chat: amount, payee, purpose, ref, cash preview, name and explicit confirmation." loading="lazy"></a><figcaption>The approval dialog after the user approved in chat: amount, payee, purpose, ref, cash preview, name and explicit confirmation.</figcaption></figure><figure><a href="screenshots/102_report.jpg"><img src="screenshots/102_report.jpg" alt="Crew report (Boss, Accounting, Facilities: 3 of 5 agents) and “Your decisions”: the $2,400.00 rent approval." loading="lazy"></a><figcaption>Crew report (Boss, Accounting, Facilities: 3 of 5 agents) and “Your decisions”: the $2,400.00 rent approval.</figcaption></figure></div>
+</section>
+<section class="ticket" id="t103">
+  <header>
+    <h2>#103 · Bulk hoodie discount</h2>
+    <span class="pill">Resolved</span>
+    <span class="cash ">cash $0.00</span>
+  </header>
+  <p>Resolved with no money moved. 8 of 20 size M hoodies on hand (12 short; apparel sourcing ~5 days, earliest 2026-09-05). The team drafted (not sent) a list-price quote ($58 each, $1,160 for 20) and asked whether the club wants a discount reviewed; an illustrative 5% discount was left as a human decision and not granted. The 12-unit restock was blocked by the cash guardrail (no verified cost), so nothing was ordered.</p>
+  <dl>
+    <div><dt>Run</dt><dd><code>5a2a491de789</code> · gpt-6-luna · 15 model requests · 29,202 in / 4,379 out tokens</dd></div>
+    <div><dt>Delegations</dt><dd>boss -&gt; customer_service · boss -&gt; accounting · boss -&gt; inventory · customer_service -&gt; accounting</dd></div>
+    <div><dt>Not called</dt><dd>facilities</dd></div>
+    <div><dt>Human</dt><dd><ul><li>Resolution approved by Navya Sharma: no money moved (audit seq 392)</li></ul></dd></div>
+  </dl>
+  <div class="shots"><figure><a href="screenshots/103_resolved.jpg"><img src="screenshots/103_resolved.jpg" alt="Resolved: all three tickets Resolved (0 open · 3 resolved), checking $1,000.00, no payable item on #103." loading="lazy"></a><figcaption>Resolved: all three tickets Resolved (0 open · 3 resolved), checking $1,000.00, no payable item on #103.</figcaption></figure><figure><a href="screenshots/103_live.jpg"><img src="screenshots/103_live.jpg" alt="While the team worked: Boss and Customer Service working; Inventory 2 tool calls, Accounting 11." loading="lazy"></a><figcaption>While the team worked: Boss and Customer Service working; Inventory 2 tool calls, Accounting 11.</figcaption></figure><figure><a href="screenshots/103_proposal.jpg"><img src="screenshots/103_proposal.jpg" alt="Run complete: list-price quote recommended; the unpriced restock was blocked, so nothing to approve." loading="lazy"></a><figcaption>Run complete: list-price quote recommended; the unpriced restock was blocked, so nothing to approve.</figcaption></figure><figure><a href="screenshots/103_resolve_dialog.jpg"><img src="screenshots/103_resolve_dialog.jpg" alt="Human-approved resolution for #103: name and explicit confirmation; no money moves." loading="lazy"></a><figcaption>Human-approved resolution for #103: name and explicit confirmation; no money moves.</figcaption></figure><figure><a href="screenshots/103_report.jpg"><img src="screenshots/103_report.jpg" alt="Guardrail checks (one FAIL: restock without a verified cost), “Your decisions”, and the crew report." loading="lazy"></a><figcaption>Guardrail checks (one FAIL: restock without a verified cost), “Your decisions”, and the crew report.</figcaption></figure></div>
+</section>
+  <p class="note">Every screenshot is a real capture of the running dashboard taken during these runs, not a mock-up. They come from the Claude app Browser pane with a 1500×950 viewport, saved as 800×506 JPEGs, and each file is byte-identical to the pane's original capture. Each approval was given by the user in chat first and then entered in the dashboard. Details: <code>resolved_tickets.json</code>, the Actual and Cash tabs of <code>desk_tickets.html</code>, and <code>audit_trail.json</code> (seq 200–392).</p>
+</main>
+</body></html>
